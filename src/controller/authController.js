@@ -1,6 +1,7 @@
 import { registerUser,loginUser,logoutUser,getUserProfile,updateProfile } from "../services/authService.js";
 import { setTokenCookie } from "../utils/generateToken.js";
 
+//register user
 export const registerUserController = async(req,res) =>{
     try {
        const {name, email, password} = req.body;
@@ -11,14 +12,14 @@ export const registerUserController = async(req,res) =>{
 
     } catch (error) {
         console.error('Error at register user:', error);
-        
+
         if(error.message === 'User already exists'){
             return res.status(400).json({ message: error.message });
         }
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-
+//login user
 export const loginUserController = async(req,res) =>{
     try {
       const {email,password} = req.body;
@@ -33,7 +34,7 @@ export const loginUserController = async(req,res) =>{
         res.status(500).json({ message: 'Internal server error' });
     }
 }
-
+//logout user
 export const logoutUserController = async(req,res) =>{
     try {
        await logoutUser(req,res);
